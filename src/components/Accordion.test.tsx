@@ -7,8 +7,6 @@ import a11yTest from '../testutils/a11yTest'
 import Accordion, { AccordionItem } from '..'
 
 describe('<Accordion />', () => {
-  // tslint:disable:no-console
-
   let consoleSpy: sinon.SinonSpy
   beforeEach(() => {
     consoleSpy = sinon.spy(console, 'error')
