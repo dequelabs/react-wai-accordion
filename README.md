@@ -1,5 +1,7 @@
 # @deque/react-accordion
 
+[![CircleCI](https://circleci.com/gh/dequelabs/react-accordion.svg?style=svg&circle-token=74120e2187dd217faaaaf9b1180d252f5bed4f03)](https://circleci.com/gh/dequelabs/react-accordion)
+
 > An Accordion component for React, based on the [WAI Accordion guidelines](https://www.w3.org/TR/wai-aria-practices/#accordion).
 
 ## Installation
@@ -12,7 +14,7 @@ npm install @deque/react-accordion
 
 ## Usage
 
-This component was designed to be used as building-blocks for a more complex component. It _only_ takes care of the ARIA relationships and markup required for an accordion. It does not provide _any_ styling for you -- you must write your own styles.
+This component was designed to be used as building-blocks for a more complex component. It _only_ takes care of the logic, ARIA relationships and markup required for an accordion. It does not provide _any_ styling for you &mdash; you must write your own styles.
 
 However, example styles can be found in `src/example/app.css`.
 
@@ -23,36 +25,26 @@ A simple example demonstrating how to use the component.
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Accordion, {
-  AccordionContent,
-  AccordionItem,
-  AccordionTitle
-} from '@deque/react-accordion'
+import Accordion, { AccordionItem } from '@deque/react-accordion'
 
 const App = () => (
   <div className="App">
     <Accordion classPrefix="MyAccordion" idPrefix="acc_">
-      <AccordionItem>
-        <AccordionTitle>Fruits</AccordionTitle>
-        <AccordionContent>
-          <h4>List of fruits</h4>
-          <ul>
-            <li>apples</li>
-            <li>oranges</li>
-            <li>bananas</li>
-          </ul>
-        </AccordionContent>
+      <AccordionItem title="Fruits">
+        <h4>List of fruits</h4>
+        <ul>
+          <li>apples</li>
+          <li>oranges</li>
+          <li>bananas</li>
+        </ul>
       </AccordionItem>
-      <AccordionItem>
-        <AccordionTitle>Animals</AccordionTitle>
-        <AccordionContent>
-          <h4>List of animals</h4>
-          <ul>
-            <li>Dogs</li>
-            <li>Chickens</li>
-            <li>Alligators</li>
-          </ul>
-        </AccordionContent>
+      <AccordionItem title={<span>Animals</span>}>
+        <h4>List of animals</h4>
+        <ul>
+          <li>Dogs</li>
+          <li>Chickens</li>
+          <li>Alligators</li>
+        </ul>
       </AccordionItem>
     </Accordion>
   </div>
@@ -68,7 +60,7 @@ A full example can be seen in `src/example` and run with `npm run dev`.
 
 ### Component API
 
-The `@deque/react-accordion` package exports 4 different components, each with a specific purpose as described below.
+The `@deque/react-accordion` package exports 2 different components, each with a specific purpose as described below.
 
 #### `<Accordion />`
 
@@ -86,34 +78,14 @@ Any additional props provided to the `<Accordion />` will be passed onto the ren
 
 #### `<AccordionItem />`
 
-The `<AccordionItem />` denotes a collapsable item within the `<Accordion />`. The `<AccordionItem />` **must** be provided exactly 2 children; one of type `<AccordionTitle />` and the other of `<AccordionContent />`. Failure to provide the expected children will result in an error being raised in development.
+The `<AccordionItem />` denotes a collapsable item within the `<Accordion />`. The `<AccordionItem />` **must** be provided a `title` and `children` to expand/collapse.
 
 ##### AccordionItem Props
 
-- `children`: one `<AccordionTitle />` and one `<AccordionContent />`
+- `title`: a string or JSX element to render for the item's title
+- `children`: content to expand/collapse
 
 Any additional props provided to the `<AccordionItem />` will be passed onto the rendered `<div>` element.
-
-#### `<AccordionTitle />`
-
-The title/heading for the accordion item. By default this is rendered as an `<h4>`. The heading will be _contained_ in a `<button>` which controls opening/closing the corresponding `<AccordionContent />`.
-
-##### AccordionTitle Props
-
-- `children`: Any React node which describes the associated chunk of content
-- `is`: an optional string denoting what _type_ of element the title should be rendered as. By default, this is `h4`.
-
-Any additional props provided to the `<AccordionTitle />` will be passed onto the rendered element.
-
-#### `<AccordionContent />`
-
-The `<AccordionContent />` contains the `<AccordionItem />`'s collapsable content.
-
-##### AccordionContent Props
-
-- `children`: Any React node which
-
-Any additional props provided to the `<AccordionContent />` will be passed onto the rendered `<div>` element.
 
 ### CSS API
 

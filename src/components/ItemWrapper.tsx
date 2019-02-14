@@ -2,10 +2,16 @@ import * as React from 'react'
 import keycode = require('keycode')
 import classes from '../lib/classes'
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+// All "allowed" div attrs, excluding title.
+type DivAttrsNoTitle = Pick<
+  React.HTMLAttributes<HTMLDivElement>,
+  Exclude<keyof React.HTMLAttributes<HTMLDivElement>, 'title'>
+>
+
+interface Props extends DivAttrsNoTitle {
   classPrefix: string
-  titleComponent: React.ReactNode
-  contentComponent: React.ReactNode
+  title: React.ReactNode
+  children: React.ReactNode
   id: string
   onToggle: (id: string) => void
   onFocusShift: (
@@ -22,8 +28,7 @@ class ItemWrapper extends React.Component<Props> {
   public render() {
     const {
       id,
-      titleComponent,
-      contentComponent,
+      title,
       children,
       className = '',
       open,
@@ -56,7 +61,7 @@ class ItemWrapper extends React.Component<Props> {
             ref={buttonRef}
             type="button"
           >
-            {titleComponent}
+            {title}
             <span className={`${classPrefix}-item-icon`} />
           </button>
         </div>
@@ -68,7 +73,7 @@ class ItemWrapper extends React.Component<Props> {
           className={`${classPrefix}-item-content`}
           hidden={!open}
         >
-          {contentComponent}
+          {children}
         </div>
       </div>
     )

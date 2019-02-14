@@ -3,8 +3,6 @@ import randomId from '../lib/randomId'
 import logOrThrowError from '../lib/logOrThrowError'
 import Item from './Item'
 import ItemWrapper from './ItemWrapper'
-import Content from './Content'
-import Title from './Title'
 
 const DEFAULT_CLASSPREFIX = 'Accordion'
 const DEFAULT_IDPREFIX = 'accordion__'
@@ -28,7 +26,6 @@ class Accordion extends React.Component<Props, State> {
       const children = props[propName]
 
       let hasInvalidChild = false
-      let hasInvalidGrandchild = false
 
       if (!React.Children.count(children)) {
         return new Error(
@@ -41,26 +38,11 @@ class Accordion extends React.Component<Props, State> {
           hasInvalidChild = true
           return
         }
-
-        React.Children.forEach(
-          child.props.children,
-          (grandchild: React.ReactElement<any>) => {
-            if (grandchild.type !== Content && grandchild.type !== Title) {
-              hasInvalidGrandchild = true
-            }
-          }
-        )
       })
 
       if (hasInvalidChild) {
         return new Error(
           'Accordion expects children to be of type AccordionItem'
-        )
-      }
-
-      if (hasInvalidGrandchild) {
-        return new Error(
-          'Accordion expects AccordionItem to contain AccordionTitle and AccordionContent only'
         )
       }
 
@@ -117,43 +99,24 @@ class Accordion extends React.Component<Props, State> {
     }
 
     const { classPrefix = DEFAULT_CLASSPREFIX } = this.props
-    const { children } = child.props
+    const { title, children } = child.props
     const childId = this.idMap.get(child) as string
     const isOpen = this.state.selectedItemId === childId
-
-    const childCount = React.Children.count(children)
-    if (childCount !== 2) {
-      logOrThrowError(`Accordion: expecting 2 children, received ${childCount}`)
-      return
-    }
-
-    let title: React.ReactNode
-    let content: React.ReactNode
-    React.Children.forEach(children, (grandchild: React.ReactElement<any>) => {
-      if (grandchild.type === Title) {
-        title = grandchild
-      } else if (grandchild.type === Content) {
-        content = grandchild
-      } else {
-        logOrThrowError(
-          'Accordion: invalid grandchild provided. Expecting AccordionTitle and AccordionContent only.'
-        )
-      }
-    })
 
     return (
       <ItemWrapper
         classPrefix={classPrefix}
         onFocusShift={this.handleFocusShift}
-        titleComponent={title}
-        contentComponent={content}
+        title={title}
         id={childId}
         onToggle={this.handleToggleItem}
         open={isOpen}
         buttonRef={(el: HTMLButtonElement | null) =>
           this.itemRefMap.set(childId, el)
         }
-      />
+      >
+        {children}
+      </ItemWrapper>
     )
   }
 

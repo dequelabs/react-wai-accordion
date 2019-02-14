@@ -2,12 +2,9 @@ import 'mocha'
 import { assert } from 'chai'
 import * as React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
-
 import * as sinon from 'sinon'
-
 import a11yTest from '../testutils/a11yTest'
-import Accordion from './Accordion'
-import { AccordionItem, AccordionTitle, AccordionContent } from '..'
+import Accordion, { AccordionItem } from '..'
 
 describe('<Accordion />', () => {
   // tslint:disable:no-console
@@ -25,14 +22,8 @@ describe('<Accordion />', () => {
     assert.doesNotThrow(() => {
       mount(
         <Accordion>
-          <AccordionItem>
-            <AccordionTitle>One</AccordionTitle>
-            <AccordionContent>One content</AccordionContent>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionTitle>Two</AccordionTitle>
-            <AccordionContent>Two content</AccordionContent>
-          </AccordionItem>
+          <AccordionItem title="One">One content</AccordionItem>
+          <AccordionItem title="Two">Two content</AccordionItem>
         </Accordion>
       )
     })
@@ -43,10 +34,7 @@ describe('<Accordion />', () => {
     before(() => {
       m = mount(
         <Accordion classPrefix="Test">
-          <AccordionItem>
-            <AccordionTitle>One</AccordionTitle>
-            <AccordionContent>One content</AccordionContent>
-          </AccordionItem>
+          <AccordionItem title="One">One content</AccordionItem>
         </Accordion>
       )
     })
@@ -111,64 +99,12 @@ describe('<Accordion />', () => {
     })
   })
 
-  describe('given non-title/content item children', () => {
-    it('should warn', () => {
-      try {
-        mount(
-          <Accordion classPrefix="C">
-            <AccordionItem>
-              <div />
-            </AccordionItem>
-          </Accordion>
-        )
-      } catch (error) {
-        // Ignore. In non-production mode, this will throw.
-      }
-
-      try {
-        mount(
-          <Accordion classPrefix="Test">
-            <AccordionItem>
-              <AccordionTitle>hi</AccordionTitle>
-            </AccordionItem>
-          </Accordion>
-        )
-      } catch (error) {
-        // Ignore. In non-production mode, this will throw.
-      }
-
-      try {
-        mount(
-          <Accordion classPrefix="Test">
-            <AccordionItem>
-              <AccordionContent>hi</AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        )
-      } catch (error) {
-        // Ignore. In non-production mode, this will throw.
-      }
-
-      assert.isTrue(consoleSpy.called)
-
-      const call = consoleSpy.getCall(0)
-      const warning = call.args[0]
-      assert.include(
-        warning,
-        'Accordion expects AccordionItem to contain AccordionTitle and AccordionContent only'
-      )
-    })
-  })
-
   describe('when toggling an item', () => {
     describe('when the item is closed', () => {
       it("should set `state.selectedItemId` to the item's id", () => {
         const m = mount(
           <Accordion>
-            <AccordionItem>
-              <AccordionTitle>hello</AccordionTitle>
-              <AccordionContent>hi</AccordionContent>
-            </AccordionItem>
+            <AccordionItem title="hi">hello</AccordionItem>
           </Accordion>
         )
 
@@ -187,10 +123,7 @@ describe('<Accordion />', () => {
       it('should set `state.selectedItemid` to `null`', async () => {
         const m = mount(
           <Accordion>
-            <AccordionItem>
-              <AccordionTitle>hello</AccordionTitle>
-              <AccordionContent>hi</AccordionContent>
-            </AccordionItem>
+            <AccordionItem title="hi">hello</AccordionItem>
           </Accordion>
         )
 
@@ -212,14 +145,8 @@ describe('<Accordion />', () => {
 
   a11yTest(
     <Accordion>
-      <AccordionItem>
-        <AccordionTitle>One</AccordionTitle>
-        <AccordionContent>One content</AccordionContent>
-      </AccordionItem>
-      <AccordionItem>
-        <AccordionTitle>Two</AccordionTitle>
-        <AccordionContent>Two content</AccordionContent>
-      </AccordionItem>
+      <AccordionItem title="One">One content</AccordionItem>
+      <AccordionItem title="Two">Two content</AccordionItem>
     </Accordion>
   )
 })

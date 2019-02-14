@@ -30,7 +30,7 @@
 
 .MyAccordion-item-icon::after {
   position: absolute;
-  right: 6px;
+  right: 12px;
   top: 12px;
   content: '▶';
 }

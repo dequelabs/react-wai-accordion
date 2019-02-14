@@ -5,35 +5,26 @@ import { mount, ReactWrapper } from 'enzyme'
 import keycode = require('keycode')
 import a11yTest from '../testutils/a11yTest'
 import ItemWrapper from './ItemWrapper'
-import Title from './Title'
-import Content from './Content'
 
 const noop = () => {
   // Nothing.
 }
 
 describe('<ItemWrapper />', () => {
-  let title: React.ReactElement<any>
-  let content: React.ReactElement<any>
-
-  before(() => {
-    title = <Title>Hello</Title>
-    content = <Content>World</Content>
-  })
-
   it('should render without errors', () => {
     assert.doesNotThrow(() => {
       mount(
         <ItemWrapper
           id="itemid"
-          titleComponent={title}
-          contentComponent={content}
+          title="hi"
           open={false}
           onToggle={noop}
           onFocusShift={noop}
           buttonRef={noop}
           classPrefix="Item"
-        />
+        >
+          hello
+        </ItemWrapper>
       )
     })
   })
@@ -42,14 +33,15 @@ describe('<ItemWrapper />', () => {
     const m = mount(
       <ItemWrapper
         id="test"
-        titleComponent={title}
-        contentComponent={content}
+        title="Hello"
         open={false}
         onToggle={noop}
         onFocusShift={noop}
         buttonRef={noop}
         classPrefix="potato"
-      />
+      >
+        hello
+      </ItemWrapper>
     )
 
     const el = m.find('#test_title')
@@ -61,14 +53,15 @@ describe('<ItemWrapper />', () => {
     const m = mount(
       <ItemWrapper
         id="test"
-        titleComponent={title}
-        contentComponent={content}
+        title="Hello"
         open={false}
         onToggle={noop}
         onFocusShift={noop}
         buttonRef={noop}
         classPrefix="potato"
-      />
+      >
+        hello
+      </ItemWrapper>
     )
 
     const el = m.find('#test_content')
@@ -80,14 +73,15 @@ describe('<ItemWrapper />', () => {
     const m = mount(
       <ItemWrapper
         id="test"
-        titleComponent={title}
-        contentComponent={content}
+        title="Hello"
         open={false}
         onToggle={noop}
         onFocusShift={noop}
         buttonRef={noop}
         classPrefix="potato"
-      />
+      >
+        hello
+      </ItemWrapper>
     )
 
     const el = m.find('#test_content')
@@ -100,15 +94,16 @@ describe('<ItemWrapper />', () => {
       const m = mount(
         <ItemWrapper
           id="itemid"
-          titleComponent={title}
-          contentComponent={content}
+          title="Hello"
           open={false}
           onToggle={noop}
           onFocusShift={noop}
           buttonRef={noop}
           classPrefix="potato"
           className="Hello"
-        />
+        >
+          hello
+        </ItemWrapper>
       )
 
       const el = m.find('.potato-item.Hello')
@@ -122,14 +117,15 @@ describe('<ItemWrapper />', () => {
       m = mount(
         <ItemWrapper
           id="itemid"
-          titleComponent={title}
-          contentComponent={content}
+          title="Hello"
           open={true}
           onToggle={noop}
           onFocusShift={noop}
           buttonRef={noop}
           classPrefix="potato"
-        />
+        >
+          hello
+        </ItemWrapper>
       )
     })
 
@@ -156,14 +152,15 @@ describe('<ItemWrapper />', () => {
       const m = mount(
         <ItemWrapper
           id="itemid"
-          titleComponent={title}
-          contentComponent={content}
+          title="Hello"
           open={false}
           onToggle={onToggle}
           onFocusShift={noop}
           buttonRef={noop}
           classPrefix="potato"
-        />
+        >
+          hello
+        </ItemWrapper>
       )
 
       const el = m.find('.potato-item-trigger')
@@ -193,14 +190,15 @@ describe('<ItemWrapper />', () => {
           const m = mount(
             <ItemWrapper
               id="itemid"
-              titleComponent={title}
-              contentComponent={content}
+              title="Hello"
               open={false}
               onToggle={noop}
               onFocusShift={onFocusShift}
               buttonRef={noop}
               classPrefix="potato"
-            />
+            >
+              hello
+            </ItemWrapper>
           )
 
           const el = m.find('.potato-item-trigger')
@@ -211,4 +209,18 @@ describe('<ItemWrapper />', () => {
       })
     })
   })
+
+  a11yTest(() => (
+    <ItemWrapper
+      id="itemid"
+      title="Hello"
+      open={false}
+      onToggle={noop}
+      onFocusShift={noop}
+      buttonRef={noop}
+      classPrefix="Item"
+    >
+      hello
+    </ItemWrapper>
+  ))
 })

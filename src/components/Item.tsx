@@ -1,9 +1,15 @@
 import * as React from 'react'
 import logOrThrowError from '../lib/logOrThrowError'
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+// All "allowed" div attrs, excluding title.
+type DivAttrsNoTitle = Pick<
+  React.HTMLAttributes<HTMLDivElement>,
+  Exclude<keyof React.HTMLAttributes<HTMLDivElement>, 'title'>
+>
+
+interface Props extends DivAttrsNoTitle {
   children: React.ReactNode
-  open?: boolean
+  title: React.ReactNode
 }
 
 const Item = (props: Props) => {

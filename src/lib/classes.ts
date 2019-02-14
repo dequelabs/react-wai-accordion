@@ -3,23 +3,23 @@
  */
 
 interface ClassNames {
-  [s: string]: boolean;
+  [s: string]: boolean
 }
 
 const compileClassnames = (classes: ClassNames) => {
-  const classList: string[] = [];
+  const classList: string[] = []
   for (const key in classes) {
     // istanbul ignore if
     if (!classes.hasOwnProperty(key)) {
-      continue;
+      continue
     }
 
     if (classes[key]) {
-      classList.push(key.trim());
+      classList.push(key.trim())
     }
   }
 
-  return classList.join(' ');
-};
+  return classList.join(' ')
+}
 
-export default compileClassnames;
+export default compileClassnames
