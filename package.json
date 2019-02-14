@@ -4,6 +4,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "parcel src/example/index.html",
+    "build:example": "parcel build src/example/index.html --out-dir=dist/example",
     "fmt": "prettier --write *.{json,md} 'src/**/*.{ts,tsx,css}'",
     "lint": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}'",
     "test": "mocha -r ts-node/register -r jsdom-global/register -r src/testutils/enzyme.ts 'src/**/*.test.{ts,tsx}'",
