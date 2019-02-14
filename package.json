@@ -1,0 +1,84 @@
+{
+  "name": "@deque/react-accordion",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "tsc",
+    "dev": "parcel src/example/index.html",
+    "fmt": "prettier --write *.{json,md} 'src/**/*.{ts,tsx,css}'",
+    "lint": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}'",
+    "test": "mocha -r ts-node/register -r jsdom-global/register -r src/testutils/enzyme.ts 'src/**/*.test.{ts,tsx}'",
+    "coverage": "nyc npm run test",
+    "prepublishOnly": "npm run build"
+  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "styles": "dist/index.css",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/enzyme": "^3.1.18",
+    "@types/enzyme-adapter-react-16": "^1.0.4",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.0",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/sinon": "^7.0.6",
+    "axe-core": "^3.1.2",
+    "chai": "^4.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
+    "husky": "^1.3.1",
+    "jsdom": "^13.2.0",
+    "jsdom-global": "^3.0.2",
+    "lint-staged": "^8.1.3",
+    "mocha": "^5.2.0",
+    "nyc": "^13.2.0",
+    "parcel-bundler": "^1.11.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "sinon": "^7.2.3",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.3.3"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false
+  },
+  "dependencies": {
+    "keycode": "^2.2.0"
+  },
+  "nyc": {
+    "checkCoverage": true,
+    "exclude": [
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "src/testutils/*.ts",
+      "src/testutils/*.tsx"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "statements": 85,
+    "branches": 85,
+    "functions": 85,
+    "lines": 85
+  }
+}

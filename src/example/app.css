@@ -1,0 +1,59 @@
+/**
+ * We set the Accordion's classPrefix prop to "MyAccordion", therefore all of its child components will use the prefix.
+ */
+
+.MyAccordion {
+}
+
+.MyAccordion-item {
+  margin-bottom: 12px;
+  border: 1px solid #666;
+  border-radius: 2px;
+}
+
+.MyAccordion-item-title h3 {
+  padding: 0;
+  margin: 0;
+}
+
+.MyAccordion-item-trigger {
+  background-color: #f4f4f4;
+  color: #444;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  padding: 12px;
+  border: none;
+}
+
+.MyAccordion-item-icon::after {
+  position: absolute;
+  right: 6px;
+  top: 12px;
+  content: '▶';
+}
+.MyAccordion-item-open .MyAccordion-item-icon::after {
+  content: '▼';
+}
+
+.MyAccordion-item-content {
+  padding: 20px;
+}
+.MyAccordion-item-open .MyAccordion-item-content {
+  animation: fadeIn 0.35s ease-in;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.MyFancyTitle {
+  color: purple;
+}
