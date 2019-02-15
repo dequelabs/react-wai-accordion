@@ -3,12 +3,14 @@ const logOrThrowError = (error: string | Error) => {
     error = new Error(error)
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    throw error
+  // Guard against missing `process` global.
+  const p = typeof process === 'object' ? process : null
+  if (!p || typeof p.env !== 'object' || p.env.NODE_ENV === 'production') {
+    // tslint:disable-next-line:no-console
+    console.error(error)
   }
 
-  // tslint:disable-next-line:no-console
-  console.error(error)
+  throw error
 }
 
 export default logOrThrowError
