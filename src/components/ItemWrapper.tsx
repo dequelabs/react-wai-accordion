@@ -62,7 +62,7 @@ class ItemWrapper extends React.Component<Props> {
             type="button"
           >
             {title}
-            <span className={`${classPrefix}-item-icon`} />
+            <span className={`${classPrefix}-item-icon`} aria-hidden={true} />
           </button>
         </div>
 

@@ -18,6 +18,8 @@ This component was designed to be used as building-blocks for a more complex com
 
 However, example styles can be found in `src/example/app.css`.
 
+NOTE: this package assumes `Map`, `WeakMap` and `process.env` are available. You are responsible for adding polyfills if your environment does not already support them.
+
 ### Simple Example
 
 A simple example demonstrating how to use the component.

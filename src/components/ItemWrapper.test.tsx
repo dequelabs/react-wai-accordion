@@ -2,6 +2,7 @@ import 'mocha'
 import { assert } from 'chai'
 import * as React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
+import * as sinon from 'sinon'
 import keycode = require('keycode')
 import a11yTest from '../testutils/a11yTest'
 import ItemWrapper from './ItemWrapper'
@@ -143,11 +144,8 @@ describe('<ItemWrapper />', () => {
   })
 
   describe('clicking the title', () => {
-    it('should fire onToggle', done => {
-      const onToggle = (id: string) => {
-        assert.equal(id, 'itemid')
-        done()
-      }
+    it('should fire onToggle', () => {
+      const onToggle = sinon.stub()
 
       const m = mount(
         <ItemWrapper
@@ -165,6 +163,9 @@ describe('<ItemWrapper />', () => {
 
       const el = m.find('.potato-item-trigger')
       el.simulate('click')
+
+      assert.isTrue(onToggle.called)
+      assert.isTrue(onToggle.calledWith('itemid'))
     })
   })
 
@@ -180,12 +181,8 @@ describe('<ItemWrapper />', () => {
 
     tests.forEach(([key, direction]) => {
       describe(`pressing "${key}"`, () => {
-        it(`should fire onFocusShift with direction="${direction}"`, done => {
-          const onFocusShift = (d: string, id: string) => {
-            assert.equal(d, direction)
-            assert.equal(id, 'itemid')
-            done()
-          }
+        it(`should fire onFocusShift with direction="${direction}"`, () => {
+          const onFocusShift = sinon.stub()
 
           const m = mount(
             <ItemWrapper
@@ -205,6 +202,9 @@ describe('<ItemWrapper />', () => {
           el.simulate('keydown', {
             which: keycode.codes[key]
           })
+
+          assert.isTrue(onFocusShift.called)
+          assert.isTrue(onFocusShift.calledWith(direction, 'itemid'))
         })
       })
     })
