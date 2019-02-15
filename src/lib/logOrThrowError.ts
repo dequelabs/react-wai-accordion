@@ -8,6 +8,7 @@ const logOrThrowError = (error: string | Error) => {
   if (!p || typeof p.env !== 'object' || p.env.NODE_ENV === 'production') {
     // tslint:disable-next-line:no-console
     console.error(error)
+    return
   }
 
   throw error
