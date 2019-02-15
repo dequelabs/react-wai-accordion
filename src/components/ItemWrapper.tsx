@@ -89,7 +89,7 @@ class ItemWrapper extends React.Component<Props> {
     const key = keycode(e.which)
 
     if (key === 'up' || key === 'page up') {
-      this.props.onFocusShift('backwards', id)
+      onFocusShift('backwards', id)
     } else if (key === 'down' || key === 'page down') {
       onFocusShift('forwards', id)
     } else if (key === 'home') {
