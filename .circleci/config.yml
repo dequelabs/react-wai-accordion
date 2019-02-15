@@ -24,7 +24,7 @@ jobs:
       - restore_cache:
           key: v1-yarn-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
-      - run: yarn coverage
+      - run: A11Y_TEST=true yarn coverage
   canary_release:
     <<: *defaults
     steps:
