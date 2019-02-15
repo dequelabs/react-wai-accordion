@@ -4,8 +4,11 @@ const logOrThrowError = (error: string | Error) => {
   }
 
   // Guard against missing `process` global.
-  const p = typeof process === 'object' ? process : null
-  if (!p || typeof p.env !== 'object' || p.env.NODE_ENV === 'production') {
+  if (
+    typeof process !== 'object' ||
+    typeof process.env !== 'object' ||
+    process.env.NODE_ENV === 'production'
+  ) {
     // tslint:disable-next-line:no-console
     console.error(error)
     return
