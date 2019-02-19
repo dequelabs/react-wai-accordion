@@ -3,6 +3,8 @@ import { assert } from 'chai'
 import * as React from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import * as sinon from 'sinon'
+import { codes as keycodes } from 'keycode'
+import * as numberSuffix from 'ordinal-number-suffix'
 import a11yTest from '../testutils/a11yTest'
 import Accordion, { AccordionItem } from '..'
 
@@ -137,6 +139,82 @@ describe('<Accordion />', () => {
         trigger.simulate('click')
 
         assert.equal((m.state() as any).selectedItemId, null)
+      })
+    })
+  })
+
+  describe('keyboard events', () => {
+    let m: ReactWrapper
+    let triggers: ReactWrapper
+
+    beforeEach(() => {
+      m = mount(
+        <Accordion>
+          <AccordionItem title="one">hello</AccordionItem>
+          <AccordionItem title="two">hello</AccordionItem>
+          <AccordionItem title="three">hello</AccordionItem>
+        </Accordion>
+      )
+
+      triggers = m.find('.Accordion-item-trigger')
+    })
+
+    interface KeyboardTestCase {
+      keyname: string
+      startIndex: number
+      endIndex: number
+    }
+
+    const tests: KeyboardTestCase[] = [
+      {
+        keyname: 'up',
+        startIndex: 0,
+        endIndex: 2
+      },
+      {
+        keyname: 'up',
+        startIndex: 1,
+        endIndex: 0
+      },
+      {
+        keyname: 'down',
+        startIndex: 0,
+        endIndex: 1
+      },
+      {
+        keyname: 'down',
+        startIndex: 2,
+        endIndex: 0
+      },
+      {
+        keyname: 'home',
+        startIndex: 1,
+        endIndex: 0
+      },
+      {
+        keyname: 'end',
+        startIndex: 1,
+        endIndex: 2
+      }
+    ]
+
+    tests.forEach(({ keyname, startIndex, endIndex }) => {
+      const s = numberSuffix(startIndex)
+      describe(`pressing "${keyname}" on the ${s} element`, () => {
+        it('should focus the correct element', () => {
+          const start = triggers.at(startIndex)
+          const end = triggers.at(endIndex)
+
+          const endNode = end.getDOMNode()
+
+          const focusSpy = sinon.spy(endNode as HTMLButtonElement, 'focus')
+
+          start.simulate('keydown', {
+            which: keycodes[keyname]
+          })
+
+          assert.isTrue(focusSpy.called, 'Did not focus expected element')
+        })
       })
     })
   })
