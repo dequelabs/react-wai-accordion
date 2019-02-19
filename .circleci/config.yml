@@ -1,0 +1,69 @@
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:10
+  working_directory: ~/react-accordion
+
+jobs:
+  dependencies:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+  tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: yarn lint
+      - run: A11Y_TEST=true yarn coverage
+  canary_release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: npm whoami
+      - run: .circleci/canary-version.js
+      - run: npm publish --tag=next
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
+      - run: npm whoami
+      - run: npm publish
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - dependencies
+      - tests:
+          requires:
+            - dependencies
+      - canary_release:
+          requires:
+            - dependencies
+            - tests
+          filters:
+            branches:
+              only: develop
+      - release:
+          requires:
+            - dependencies
+            - tests
+          filters:
+            branches:
+              only: master
