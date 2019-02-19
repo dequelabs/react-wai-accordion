@@ -12,8 +12,12 @@
     "prepublishOnly": "npm run build"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "license": "MPL-2.0",
+  "dependencies": {
+    "keycode": "^2.2.0",
+    "prop-types": "^15.7.2"
+  },
   "peerDependencies": {
     "react": "^16"
   },
@@ -57,10 +61,6 @@
     "semi": false,
     "singleQuote": true,
     "useTabs": false
-  },
-  "dependencies": {
-    "keycode": "^2.2.0",
-    "prop-types": "^15.7.2"
   },
   "nyc": {
     "checkCoverage": true,
