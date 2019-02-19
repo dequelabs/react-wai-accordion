@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types'
 import randomId from '../lib/randomId'
 import logOrThrowError from '../lib/logOrThrowError'
 import Item from './Item'
@@ -21,6 +22,8 @@ class Accordion extends React.Component<Props, State> {
   public static displayName = 'Accordion'
 
   public static propTypes = {
+    classPrefix: PropTypes.string,
+    idPrefix: PropTypes.string,
     // Validate child component types.
     children(props: object, propName: string) {
       const children = props[propName]

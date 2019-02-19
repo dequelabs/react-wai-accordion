@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as PropTypes from 'prop-types'
 import logOrThrowError from '../lib/logOrThrowError'
 
 // All "allowed" div attrs, excluding title.
@@ -17,6 +18,11 @@ const Item = (props: Props) => {
     'AccordionItem should not be rendered, but consumed by Accordion instead.'
   )
   return null
+}
+
+Item.propTypes = {
+  children: PropTypes.node.isRequired,
+  title: PropTypes.node.isRequired
 }
 
 export default Item
