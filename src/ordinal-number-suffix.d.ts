@@ -1,4 +1,4 @@
 declare module 'ordinal-number-suffix' {
-  function numberSuffix(number): string
+  function numberSuffix(n: number): string
   export = numberSuffix
 }
