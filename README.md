@@ -1,6 +1,6 @@
-# @deque/react-accordion
+# react-wai-accordion
 
-[![CircleCI](https://circleci.com/gh/dequelabs/react-accordion.svg?style=svg&circle-token=74120e2187dd217faaaaf9b1180d252f5bed4f03)](https://circleci.com/gh/dequelabs/react-accordion)
+[![CircleCI](https://circleci.com/gh/dequelabs/react-wai-accordion.svg?style=svg&circle-token=74120e2187dd217faaaaf9b1180d252f5bed4f03)](https://circleci.com/gh/dequelabs/react-wai-accordion)
 
 > An Accordion component for React, based on the [WAI Accordion guidelines](https://www.w3.org/TR/wai-aria-practices/#accordion).
 
@@ -9,7 +9,7 @@
 With `npm`, do:
 
 ```
-npm install @deque/react-accordion
+npm install react-wai-accordion
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ A simple example demonstrating how to use the component.
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Accordion, { AccordionItem } from '@deque/react-accordion'
+import Accordion, { AccordionItem } from 'react-wai-accordion'
 
 const App = () => (
   <div className="App">
@@ -62,7 +62,7 @@ A full example can be seen in `src/example` and run with `npm run dev`.
 
 ### Component API
 
-The `@deque/react-accordion` package exports 2 different components, each with a specific purpose as described below.
+The `react-wai-accordion` package exports 2 different components, each with a specific purpose as described below.
 
 #### `<Accordion />`
 
