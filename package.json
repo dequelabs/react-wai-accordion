@@ -22,7 +22,7 @@
     "react": "^16"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.3",
+    "@types/chai": "^4.2.4",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.4",
     "@types/mocha": "^5.2.6",
