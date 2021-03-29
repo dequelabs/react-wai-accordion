@@ -9,7 +9,8 @@
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "test": "mocha -r ts-node/register -r jsdom-global/register -r src/testutils/enzyme.ts 'src/**/*.test.{ts,tsx}'",
     "coverage": "nyc npm run test",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "standard-version"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -53,6 +54,7 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "sinon": "^7.5.0",
+    "standard-version": "^9.1.1",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   },
