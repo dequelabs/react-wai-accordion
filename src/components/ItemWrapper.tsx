@@ -25,14 +25,16 @@ interface Props extends DivAttrsNoTitle {
 class ItemWrapper extends React.Component<Props> {
   public static displayName = 'AccordionItemWrapper'
 
-  public render() {
+  public render(): React.ReactElement {
     const {
       id,
       title,
       children,
       className = '',
       open,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onToggle,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onFocusShift,
       buttonRef,
       classPrefix,
