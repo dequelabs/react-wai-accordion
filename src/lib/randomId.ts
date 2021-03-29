@@ -1,4 +1,4 @@
-const randomId = (prefix: string) =>
+const randomId = (prefix: string): string =>
   prefix +
   Math.random()
     .toString(36)

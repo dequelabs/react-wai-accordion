@@ -18,7 +18,7 @@ describe('logOrThrowError', () => {
   })
 
   describe('given a string', () => {
-    it('should coherce to an Error', () => {
+    it('should coerce to an Error', () => {
       try {
         logOrThrowError('boom!')
       } catch (error) {

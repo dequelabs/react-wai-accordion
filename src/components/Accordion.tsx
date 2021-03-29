@@ -25,7 +25,7 @@ class Accordion extends React.Component<Props, State> {
     classPrefix: PropTypes.string,
     idPrefix: PropTypes.string,
     // Validate child component types.
-    children(props: object, propName: string) {
+    children(props: Record<string, unknown>, propName: string): Error | null {
       const children = props[propName]
 
       let hasInvalidChild = false
@@ -36,12 +36,15 @@ class Accordion extends React.Component<Props, State> {
         )
       }
 
-      React.Children.forEach(children, (child: React.ReactElement<any>) => {
-        if (child.type !== Item || !child.props.children) {
-          hasInvalidChild = true
-          return
+      React.Children.forEach(
+        children as React.ReactElement,
+        (child: React.ReactElement) => {
+          if (child.type !== Item || !child.props.children) {
+            hasInvalidChild = true
+            return
+          }
         }
-      })
+      )
 
       if (hasInvalidChild) {
         return new Error(
@@ -63,7 +66,7 @@ class Accordion extends React.Component<Props, State> {
   // Child ID -> item button ref map.
   private itemRefMap = new Map<string, HTMLButtonElement | null>()
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
 
     // Set the initial IDs.
@@ -73,10 +76,11 @@ class Accordion extends React.Component<Props, State> {
     })
   }
 
-  public render() {
+  public render(): React.ReactElement {
     const {
       children,
       classPrefix = DEFAULT_CLASSPREFIX,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       idPrefix,
       ...props
     } = this.props
@@ -137,7 +141,7 @@ class Accordion extends React.Component<Props, State> {
   ) => {
     const ids = Array.from(this.itemRefMap.keys())
     const index = ids.indexOf(id)
-    let nextIndex: number = -1
+    let nextIndex = -1
 
     if (direction === 'start') {
       nextIndex = 0

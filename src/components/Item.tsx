@@ -13,7 +13,7 @@ interface Props extends DivAttrsNoTitle {
   title: React.ReactNode
 }
 
-const Item = (props: Props) => {
+const Item: React.ComponentType<Props> = () => {
   logOrThrowError(
     'AccordionItem should not be rendered, but consumed by Accordion instead.'
   )
