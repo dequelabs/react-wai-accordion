@@ -21,6 +21,7 @@
     "src/example/*",
     "src/components/*.test.tsx",
     "src/lib/*.test.ts",
-    "src/testutils/*"
+    "src/testutils/*",
+    "node_modules"
   ]
 }
