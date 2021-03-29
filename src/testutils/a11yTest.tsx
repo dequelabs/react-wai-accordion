@@ -6,9 +6,9 @@ import * as axe from 'axe-core'
 
 let fixture: HTMLDivElement
 
-type ElementCallback = () => React.ReactElement<{}>
+type ElementCallback = () => React.ReactElement
 
-const a11yTest = (element: ElementCallback | React.ReactElement<{}>) => {
+const a11yTest = (element: ElementCallback | React.ReactElement): void => {
   // You must opt-in to a11y tests using the env var.
   const a = process.env.A11Y_TEST
   if (a !== 'true' && a !== '1') {

@@ -1,4 +1,4 @@
-const logOrThrowError = (error: string | Error) => {
+const logOrThrowError = (error: string | Error): void => {
   if (typeof error === 'string') {
     error = new Error(error)
   }

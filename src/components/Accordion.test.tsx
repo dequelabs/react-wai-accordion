@@ -59,8 +59,8 @@ describe('<Accordion />', () => {
   describe('given no children', () => {
     it('should warn', () => {
       try {
-        // Not using JSX to "trick" the TS compiler into allowing this.
-        mount(React.createElement(Accordion, { classPrefix: 'hi' }))
+        // @ts-ignore
+        mount(<Accordion classPrefix="hi" />)
       } catch (error) {
         // Ignore
       }
